@@ -1,0 +1,9 @@
+charts:
+  - name: k8s-jupyterhub-r2d
+    path: k8s-jupyterhub-r2d
+images:
+  - name: jupyterhub/k8s-hub
+    valuesPath: hub.image
+    build:
+      contextPath: images
+      dockerfilePath: images/Dockerfile

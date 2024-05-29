@@ -1,0 +1,26 @@
+proxy:
+  secretToken: "f52ad5f475ee026d37a444354fcc35a41a9071ea99fd948f1bb8d77c3ade77ae"
+  service:
+    type: ClusterIP
+
+hub:
+  cookieSecret: "51a7dc2305837d539e4b69f5cdc65fa461dfa5e7422360e1a98db2f4e2097e25"
+
+ingress:
+  enabled: true
+  annotations: {}
+  hosts:
+    - host: "jupyterhub.local"
+      paths: ["/"]
+  tls:
+    enabled: false
+    secretName: "jupyterhub-tls"
+
+traefik:
+  enabled: true
+  dashboard:
+    enabled: true
+    domain: "traefik.local"
+  ssl:
+    enabled: false
+    domains: []
