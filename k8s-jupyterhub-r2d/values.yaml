@@ -1,10 +1,12 @@
 proxy:
-  secretToken: "d9bf2609abbaba0d90a9bed1896954a3cb50d2f4e4df4d9f268b5970ba51e623"
+  secretToken: "8c1206c39fdfe3bf1044f3e7ba82b3bcdc91ea7571e3d44ed48961c8bcf82732"
   service:
     type: ClusterIP
 
 hub:
-  cookieSecret: "8c12bccba43ad0469f7a44bf7c6b4952cd7bd8931ae4352311d3c217bce1cc8d"
+  cookieSecret: "39518658e817ddd4d4e4be27914db6f5d45c41b8e37315a0287fbf7c54cecb4d"
+  extraEnv:
+    DUMMY_AUTH_PASSWORD: "default_password"
 
 ingress:
   enabled: true

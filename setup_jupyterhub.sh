@@ -34,6 +34,8 @@ proxy:
 
 hub:
   cookieSecret: "$HUB_COOKIE_SECRET"
+  extraEnv:
+    DUMMY_AUTH_PASSWORD: "default_password"
 
 ingress:
   enabled: true
@@ -99,13 +101,30 @@ COPY jupyterhub_config.py .
 CMD ["jupyterhub", "-f", "/srv/jupyterhub/jupyterhub_config.py"]
 EOF
 
+# Create jupyterhub_config.py
+cat <<EOF > $IMAGES_DIR/jupyterhub_config.py
+import os
+c = get_config()
+
+# Example JupyterHub configuration
+c.JupyterHub.bind_url = 'http://:8000'
+c.Spawner.default_url = '/lab'
+
+# Use the dummy authenticator for testing purposes
+c.JupyterHub.authenticator_class = 'dummyauthenticator.DummyAuthenticator'
+c.DummyAuthenticator.password = os.environ.get('DUMMY_AUTH_PASSWORD', 'default_password')
+
+# Use the simple spawner for testing purposes
+c.JupyterHub.spawner_class = 'simple'
+EOF
+
 # Create chartpress.yaml
 cat <<EOF > chartpress.yaml
 charts:
   - name: k8s-jupyterhub-r2d
     path: k8s-jupyterhub-r2d
 images:
-  - name: jupyterhub/k8s-hub
+  - name: custom-jupyterhub/k8s-hub
     valuesPath: hub.image
     build:
       contextPath: images
