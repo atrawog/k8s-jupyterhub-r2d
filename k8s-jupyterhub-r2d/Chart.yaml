@@ -1,7 +1,7 @@
 apiVersion: v2
 name: k8s-jupyterhub-r2d
 description: A Helm chart for JupyterHub with Traefik ingress
-version: 0.1.0
+version: 0.0.1-0.dev.git.4.h5f9e718
 appVersion: 1.0
 dependencies:
   - name: jupyterhub
